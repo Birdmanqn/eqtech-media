@@ -4,6 +4,7 @@ Genera un carrusel de placas para @mtgaisolutions (MTG Soluciones IA), 1080x1350
 con la marca del manual (azul noche, degradé verde→turquesa→azul→azul profundo, Poppins + Inter, logo principal).
 
 Uso: node tools/make_mtgai_carousel.js datos.json instagram/mtg/AAAA/MM/AAAA-MM-DD_tema
+     Agregá --reel para placas verticales 1080x1920 (reels e historias).
      → genera ..._1.jpg, ..._2.jpg, ... (una por placa) y avisa si algún texto no entra.
 
 datos.json:
@@ -32,10 +33,20 @@ const { chromium } = require('playwright');
 const fs = require('fs'), path = require('path');
 
 const A = path.join(__dirname, 'mtgai_assets');
+const REEL = process.argv.includes('--reel');  // 1080x1920 para reels e historias (zonas seguras de Instagram)
+const H = REEL ? 1920 : 1350;
 const url = f => 'file://' + path.join(A, f);
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const fmt = s => esc(s).replace(/\[\[(.+?)\]\]/g, '<span class="g">$1</span>').replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
 
+const REEL_CSS = `
+.slide{height:1920px;padding-top:300px}
+.content{height:1060px}
+.footer{bottom:400px}
+.src{bottom:530px}
+.swipe,.pg{display:none}
+.circuit{top:300px}
+`;
 const CSS = `
 ${[400, 500, 600, 700].map(w => `@font-face{font-family:Poppins;font-weight:${w};src:url(${url('Poppins-' + w + '.ttf')})}`).join('\n')}
 @font-face{font-family:Inter;font-weight:400;src:url(${url('Inter-Regular.otf')})}
@@ -124,18 +135,18 @@ function slideHTML(s, i, total, d) {
 }
 
 (async () => {
-  const [, , json, prefix] = process.argv;
+  const [json, prefix] = process.argv.slice(2).filter(a => a !== '--reel');
   if (!json || !prefix) { console.error('Uso: node tools/make_mtgai_carousel.js datos.json salida_prefijo'); process.exit(1); }
   const d = JSON.parse(fs.readFileSync(json, 'utf8'));
   const n = d.slides.length;
   if (n < 2 || n > 10) throw new Error('Un carrusel lleva de 2 a 10 placas');
   fs.mkdirSync(path.dirname(path.resolve(prefix)), { recursive: true });
   const b = await chromium.launch();
-  const p = await b.newPage({ viewport: { width: 1080, height: 1350 }, deviceScaleFactor: 1 });
+  const p = await b.newPage({ viewport: { width: 1080, height: H }, deviceScaleFactor: 1 });
   let warn = 0;
   for (let i = 0; i < n; i++) {
     const tmp = path.join(require('os').tmpdir(), `mtgai_slide_${process.pid}_${i}.html`);
-    fs.writeFileSync(tmp, `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}</style></head><body>${slideHTML(d.slides[i], i, n, d)}</body></html>`);
+    fs.writeFileSync(tmp, `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}${REEL ? REEL_CSS : ''}</style></head><body>${slideHTML(d.slides[i], i, n, d)}</body></html>`);
     await p.goto('file://' + tmp, { waitUntil: 'load' });
     await p.evaluate(() => document.fonts.ready);
     const over = await p.evaluate(() => { const c = document.querySelector('.content'); return c.scrollHeight - c.clientHeight; });
