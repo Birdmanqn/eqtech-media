@@ -1,0 +1,6 @@
+{"slides":[
+{"tipo":"portada","tag":"Modelos · Noticia","titulo":"Google abrió [[Gemini 4 Carbon]] a las empresas","sub":"Es su modelo más potente. Y el precio se duplica el 1 de diciembre.","swipe":"Deslizá para ver los números →"},
+{"tag":"Qué pasó","titulo":"Desde el 10 de noviembre está [[disponible para empresas]]","textos":["Antes solo lo usaban equipos de ciberseguridad seleccionados. Ahora llega a:"],"lista":["**Gemini Enterprise**, en web y en el celular.","**La API** para desarrolladores que pagan.","**GitHub Copilot**, en los planes Business y Enterprise."],"fuente":"eWeek, 11/11/2026"},
+{"tag":"Lo que cuesta","titulo":"El precio de lanzamiento [[vence el 30/11]]","tabla":{"cols":["Por millón de tokens","Hasta 30/11","Desde 1/12"],"filas":[["Entrada","US$ 2","US$ 4"],["Salida","US$ 10","US$ 20"]]},"nota":"Ejemplo: 10 millones de tokens de entrada y 1 millón de salida cuestan US$ 30 hoy y US$ 60 desde diciembre.","fuente":"eWeek, 11/11/2026"},
+{"tag":"Qué hacer","titulo":"Antes de sumarlo a tu empresa","lista":["Si usan Gemini Enterprise, el administrador tiene que habilitarlo. No aparece solo.","Si lo querés probar por API, hacelo antes del 30/11.","Elegí el modelo según la tarea: no siempre hace falta el más grande."]}
+]}

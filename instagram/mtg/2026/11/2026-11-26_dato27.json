@@ -1,0 +1,6 @@
+{"slides":[
+{"tipo":"portada","tag":"Dato · IA en el trabajo","grande":"27%","titulo":"del trabajo con IA son tareas que [[antes nadie hacía]]"},
+{"tag":"Qué midieron","titulo":"Anthropic analizó cómo trabaja [[su propio equipo]]","textos":["La empresa que hace Claude encuestó a su gente, hizo 53 entrevistas y revisó 200.000 sesiones de trabajo con IA."],"stats":[{"n":"28% → 60%","l":"del trabajo diario se hace con IA"}],"fuente":"PYMNTS, sobre el estudio de Anthropic (2026)"},
+{"tag":"Lo interesante","titulo":"La IA no solo acelera. [[Hace posible]] lo que no tenía tiempo.","textos":["Tableros, informes, proyectos postergados: tareas útiles que nunca se hacían porque llevaban demasiadas horas."],"nota":"Ojo: es una empresa de IA con ingenieros. En una empresa de servicios los números van a ser otros. Por eso hay que medir en cada caso.","fuente":"PYMNTS, sobre el estudio de Anthropic (2026)"},
+{"tag":"Cómo lo aplicamos","titulo":"Empezá por lo que hoy [[nadie hace]]","lista":["Buscamos las tareas que quedan pendientes por falta de tiempo.","Implementamos de a poco, sin cortar la operación del día a día.","Medimos el resultado antes de seguir."]}
+]}
